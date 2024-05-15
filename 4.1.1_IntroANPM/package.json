@@ -1,0 +1,14 @@
+{
+  "name": "4.1.1_introanpm",
+  "version": "1.0.0",
+  "description": "Este es un proyecto para probar las funciones básicas de npm.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tona Díaz",
+  "license": "ISC",
+  "dependencies": {
+    "number-to-text": "^0.3.9"
+  }
+}
