@@ -166,8 +166,8 @@ Promise.all([promesaTiempo1, promesaTiempo2, promesaTiempo3])
 // Este método ejecuta el then() en cuanto una promesa se cumpla. En caso de que una promesa se rechace, se ejecuta el catch().
 Promise.race([promesaTiempo1, promesaTiempo2, promesaTiempo3])
 .then((valorDePrimeraPromesaResuelta) => {
-    console.log('(Promise.race()) Alguna de las promesas ya terminó')
-    console.log(`(Promise.race()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`)
+    console.log('(Promise.race()) Alguna de las promesas ya terminó');
+    console.log(`(Promise.race()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`);
 }).catch((valorRechazo) => {
     console.log('(Promise.race()) Alguna promesa no se cumplió');
     console.log(valorRechazo); // <- Aquí se almacena el valor del reject de la promesa rechazada.
@@ -176,9 +176,33 @@ Promise.race([promesaTiempo1, promesaTiempo2, promesaTiempo3])
 // Este método ejecuta el then() si AL MENOS una de las promesas se cumple, no importa si es la primera o la última. Si todas se rechazan, se ejecuta el catch()
 Promise.any([promesaTiempo1, promesaTiempo2, promesaTiempo3])
 .then((valorDePrimeraPromesaResuelta) => {
-    console.log('(Promise.any()) Alguna de las promesas ya terminó')
-    console.log(`(Promise.any()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`)
+    console.log('(Promise.any()) Alguna de las promesas ya terminó');
+    console.log(`(Promise.any()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`);
 }).catch((valorRechazo) => {
     console.log('(Promise.any()) Todas las promesas se rechazaron');
     console.log(valorRechazo); // <- Aquí se almacena el valor del reject de la promesa rechazada.
 });
+
+// Este método ejecuta el then() una vez que todas las promesas terminan, no importa si se aceptan o se rechazan.
+Promise.allSettled([promesaTiempo1, promesaTiempo2, promesaTiempo3])
+.then((valorDePrimeraPromesaResuelta) => {
+    console.log('(Promise.allSettled()) Todas las promesas terminaron');
+    console.log(`(Promise.allSettled()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`);
+}).catch((error) => {
+    console.log(`(Promise.allSettled()) Ocurrió un error`);
+});
+
+// Ejercicio
+/* Vamos a cocinar un pastel y para eso debemos seguir los siguientes pasos:
+    1. Comprar los ingredientes -> 5 segundos
+    2. Preparar los ingredientes -> 2 segundos
+    3. Revolver los ingredientes -> 3 segundos
+    4. Precalentar el horno -> 4 segundos
+    5. Hornear mezcla -> 5 segundos
+    6. Servir pastel -> 1 segundos
+    Tiempo total = 20 segundos.
+
+    Simular cada paso con setTimeout y console logs y van preparar su pastel.
+
+    Optimizar el proceso. Utilizar procesos asíncronos para ahorrar tiempo en la preparación del pastel.
+*/
