@@ -1,3 +1,4 @@
+/*
 let promesaTiempoCongelado1 = new Promise((resolve, reject) => {
     setTimeout(() => {
         console.log('Contador terminado');
@@ -9,6 +10,7 @@ let promesaTiempoCongelado1 = new Promise((resolve, reject) => {
         }
     }, 2000)
 });
+*/
 
 /*
 let promesaTiempoCongelado2 = new Promise((resolve, reject) => {
@@ -79,6 +81,7 @@ promesaTiempoCongelado.then((galleta) => {
 });
 */
 
+/*
 promesaTiempoCongelado1.then((valorDeAcepation) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -100,6 +103,82 @@ promesaTiempoCongelado1.then((valorDeAcepation) => {
     console.log('Alguna de las promesas falló. ):');
     console.log(valorDeRechazo);
 });
+*/
 
+/*
 console.log('Estoy debajo del then');
 
+// fetch() ya es una promesa.
+const buscarTags = fetch('https://cataas.com/api/tags');
+
+buscarTags.then((valorRegresado) => {
+    console.log(valorRegresado);
+    // El método json() ya es una promesa.
+    return valorRegresado.json();
+}).then((valorJson) => {
+    console.log('Valor en JSON');
+    console.log(valorJson);
+
+    let indexTag = Math.floor(Math.random() * valorJson.length)
+    let valorTag = valorJson[indexTag];
+    return fetch(`https://cataas.com/cat/${valorTag}`)
+}).then((resultadoPeticion) => {
+    console.log('El resultado de la petición es: ');
+    console.log(resultadoPeticion);
+}).catch((valorDeRechazo) => {
+    console.log('Falló alguna de las promesas');
+    console.log(valorDeRechazo);
+});
+*/
+
+let promesaTiempo1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('Promesa 1');
+        reject('Promesa 1 ok');
+    }, 5000)
+});
+
+let promesaTiempo2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('Promesa 2');
+        reject('Promesa 2 ok');
+    }, 1000)
+});
+
+
+let promesaTiempo3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('Promesa 3');
+        reject('Promesa 3 ok');
+    }, 3000)
+});
+
+// Este método ejecuta el then() en caso de que TODAS las promesas se cumplan.
+Promise.all([promesaTiempo1, promesaTiempo2, promesaTiempo3])
+.then((valorPromesa) => {
+    console.log('(Promise.all()) Las 3 promesas se cumplieron');
+    console.log(valorPromesa); // <- Aquí se almacenan los valores del resolve de las promesas a esperar.
+}).catch((valorRechazo) => {
+    console.log('(Promise.all()) Alguna promesa no se cumplió');
+    console.log(valorRechazo); // <- Aquí se almacena el valor del reject de la promesa rechazada.
+});
+
+// Este método ejecuta el then() en cuanto una promesa se cumpla. En caso de que una promesa se rechace, se ejecuta el catch().
+Promise.race([promesaTiempo1, promesaTiempo2, promesaTiempo3])
+.then((valorDePrimeraPromesaResuelta) => {
+    console.log('(Promise.race()) Alguna de las promesas ya terminó')
+    console.log(`(Promise.race()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`)
+}).catch((valorRechazo) => {
+    console.log('(Promise.race()) Alguna promesa no se cumplió');
+    console.log(valorRechazo); // <- Aquí se almacena el valor del reject de la promesa rechazada.
+});
+
+// Este método ejecuta el then() si AL MENOS una de las promesas se cumple, no importa si es la primera o la última. Si todas se rechazan, se ejecuta el catch()
+Promise.any([promesaTiempo1, promesaTiempo2, promesaTiempo3])
+.then((valorDePrimeraPromesaResuelta) => {
+    console.log('(Promise.any()) Alguna de las promesas ya terminó')
+    console.log(`(Promise.any()) Regresó el valor: ${valorDePrimeraPromesaResuelta}`)
+}).catch((valorRechazo) => {
+    console.log('(Promise.any()) Todas las promesas se rechazaron');
+    console.log(valorRechazo); // <- Aquí se almacena el valor del reject de la promesa rechazada.
+});
