@@ -6,4 +6,6 @@
 2. Para trabajar con asincronicidad en JS podemos utilizar lo siguiente:
     - Callbacks
     - Promesas
+        - Para manejar promesas podemos utilizar los métodos then() y anidar más promesas con then() también.
+        - El método catch() recibe una función como parámetro y esta se ejecuta en caso de que alguna de las promesas sea rechazada.
     - Async/Await
