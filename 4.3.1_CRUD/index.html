@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./main.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>CRUD</title>
+</head>
+<body>
+    <header class="flex justify-between items-center gap-x-5 p-5 bg-violet-300">
+        <div>
+            <img src="https://placeholderlogo.com/img/placeholder-logo-4.png" alt="Logo">
+        </div>
+        <ul class="flex justify-around gap-x-5 font-bold">
+            <li>Home</li>
+            <li>Users</li>
+            <li>About us</li>
+        </ul>
+    </header>
+    <section>
+        <h1></h1>
+        <form id="form-create">
+            <label for="username-input">Nombre Usuario</label>
+            <input id="username-input" type="text">
+            <label for="password-input">Contraseña Usuario</label>
+            <input id="password-input" type="password">
+            <button type="submit">Registrar Usuario</button>
+        </form>
+    </section>
+    <section>
+        <h1>Mostrar Usuarios</h1>
+        <button id="show-users-button">Mostrar</button>
+        <div id="users-container">
+            
+        </div>
+    </section>
+</body>
+</html>
